@@ -4,8 +4,6 @@ public class AbilityView : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _particleEffect;
 
-    [SerializeField] private float Vremen;
-
     public void PlayEffect(Transform transform)
     {
         float timeLife = 0.5f;
