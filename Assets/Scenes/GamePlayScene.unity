@@ -1477,6 +1477,37 @@ Transform:
   - {fileID: 1421702183}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1543741536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1543741537}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1543741537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543741536}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.814, z: 0.737}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1935643070}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1920336181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1556,6 +1587,7 @@ GameObject:
   - component: {fileID: 1935643070}
   - component: {fileID: 1935643069}
   - component: {fileID: 1935643072}
+  - component: {fileID: 1935643074}
   - component: {fileID: 1935643073}
   m_Layer: 0
   m_Name: Player
@@ -1605,6 +1637,7 @@ Transform:
   m_Children:
   - {fileID: 692291069}
   - {fileID: 1967853915}
+  - {fileID: 1543741537}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1935643072
@@ -1622,7 +1655,7 @@ MonoBehaviour:
   _health: 10
   _speed: 5
   _speedRotation: 850
-  _playerTakeAbility: {fileID: 1935643073}
+  itemCollectorAbility: {fileID: 1935643073}
 --- !u!114 &1935643073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1635,11 +1668,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b1068f48901844582d29b330053326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _abilitiesArray: []
   _slotForAbilitiesArray:
   - {fileID: 1050472684}
   - {fileID: 1060350617}
   - {fileID: 1247987395}
+  _shootPoint: {fileID: 1543741537}
+--- !u!114 &1935643074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935643068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b816cb1a788e2884db26ec09332b750b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerControlAbility: {fileID: 1935643073}
 --- !u!1 &1967853914
 GameObject:
   m_ObjectHideFlags: 0

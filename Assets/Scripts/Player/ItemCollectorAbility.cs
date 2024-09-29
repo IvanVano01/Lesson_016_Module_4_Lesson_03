@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControlAbility : MonoBehaviour
+public class ItemCollectorAbility : MonoBehaviour
 {
-    [SerializeField] private List<ItemAbility> _abilitiesArray;
     [SerializeField] private List<SlotForAbility> _slotForAbilitiesArray;
+    [SerializeField] private Transform _shootPoint;
 
     private Player _player;
     private InputHandler _inputHandler;
@@ -22,32 +22,29 @@ public class PlayerControlAbility : MonoBehaviour
 
     }
 
+    public Vector3 ShootPointPosition => _shootPoint.position;
+
     public void PickUpAbility(ItemAbility itemAbility)
     {
-        if (IsAlreadyLocate(itemAbility) == false)
+        if (IsAlreadyLocate(itemAbility) == false && IsFreeSlot())
         {
             itemAbility.GetComponent<Collider>().enabled = false;
-            SetMoveAbilityOff(itemAbility);
+            itemAbility.OnPickUp();
 
             SlotForAbility epmtySlotForAbility = GetEmptySlot(itemAbility);
-            
+
             itemAbility.TransformAbility.SetParent(epmtySlotForAbility.SlotTransform);
             itemAbility.transform.position = epmtySlotForAbility.transform.position;
             itemAbility.transform.rotation = _player.transform.rotation;
-
-            _abilitiesArray.Add(itemAbility);
         }
     }
 
     public bool IsAlreadyLocate(ItemAbility itemAbility)
     {
-        if (_abilitiesArray.Count > 0)
+        foreach (SlotForAbility slotForAbility in _slotForAbilitiesArray)
         {
-            foreach (ItemAbility locateAbility in _abilitiesArray)
-            {
-                if (locateAbility.GetType() == itemAbility.GetType())
-                    return true;
-            }
+            if (slotForAbility.IsAlreadyExists(itemAbility))
+                return true;
         }
 
         return false;
@@ -65,21 +62,36 @@ public class PlayerControlAbility : MonoBehaviour
 
     private void GoToUseAbility()
     {
-        if (_abilitiesArray.Count > 0)
+        bool isAllSlotEmpty = true;
+
+        foreach (SlotForAbility slotForAbility in _slotForAbilitiesArray)
         {
-            foreach (ItemAbility itemAbility in _abilitiesArray)
+            if (slotForAbility.IsEmpty == false)
             {
+                ItemAbility itemAbility = slotForAbility.GetComponentInChildren<ItemAbility>();
+                slotForAbility.ClearFieldAbility();
+
                 itemAbility.UseAbility(this);
-
                 Destroy(itemAbility.gameObject);
-            }
 
-            _abilitiesArray.Clear();
+                isAllSlotEmpty = false;
+            }
         }
-        else
-        {
+
+        if (isAllSlotEmpty)
             Debug.Log(" Нет предметов со способностями");
+
+    }
+
+    private bool IsFreeSlot()
+    {
+        foreach (SlotForAbility slotForAbility in _slotForAbilitiesArray)
+        {
+            if (slotForAbility.IsEmpty)
+                return true;
         }
+
+        return false;
     }
 
     private SlotForAbility GetEmptySlot(ItemAbility itemAbility)
@@ -99,20 +111,5 @@ public class PlayerControlAbility : MonoBehaviour
         Debug.LogError($" Все слоты заняты! ");
         return null;
     }
-
-    private void SetMoveAbilityOff(ItemAbility itemAbility)
-    {
-        Oscillator oscillator = itemAbility.GetComponent<Oscillator>();
-        
-        if (oscillator != null)
-        {
-            oscillator.SetOscillateOff();
-        }
-
-        Rotator rotator = itemAbility.GetComponent<Rotator>();
-        if (rotator != null)
-        {
-            rotator.SetRotateOff();
-        }
-    }
+    
 }

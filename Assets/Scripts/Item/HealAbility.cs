@@ -4,12 +4,12 @@ public class HealAbility : ItemAbility
 {
     [SerializeField] private int _healthPoint;
 
-    public override void UseAbility(PlayerControlAbility playerTakeAbility)
+    public override void UseAbility(ItemCollectorAbility itemCollectorAbility)
     {
         Debug.Log($"Использую способность Хилить !!!");
 
-        playerTakeAbility.Healing(_healthPoint);
+        itemCollectorAbility.Healing(_healthPoint);
 
-        _abilityView.PlayEffect(playerTakeAbility.transform);
+        _abilityView.PlayEffect(itemCollectorAbility.transform);
     }
 }

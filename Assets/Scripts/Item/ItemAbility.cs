@@ -2,19 +2,23 @@ using UnityEngine;
 
 public abstract class ItemAbility : MonoBehaviour
 {
-    [SerializeField] protected AbilityView _abilityView;    
+    [SerializeField] protected AbilityView _abilityView;
 
-    public Transform TransformAbility => this.transform;    
+    public Transform TransformAbility => this.transform;
 
-    public abstract void UseAbility(PlayerControlAbility playerTakeAbility);    
+    public abstract void UseAbility(ItemCollectorAbility playerTakeAbility);
 
-    private void OnTriggerEnter(Collider other)
+    public void OnPickUp()
     {
-        if (other.TryGetComponent(out PlayerControlAbility playerTakeAbility))
-        {
-            playerTakeAbility.PickUpAbility(this);
-        }
+        Oscillator oscillator = GetComponent<Oscillator>();
+
+        if (oscillator != null)
+            oscillator.SetOscillateOff();
+
+        Rotator rotator = GetComponent<Rotator>();
+
+        if (rotator != null)
+            rotator.SetRotateOff();
 
     }
-
 }

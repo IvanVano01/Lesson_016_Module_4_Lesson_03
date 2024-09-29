@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilityView: {fileID: 795999864297009304}
-  _bulletPrefab: {fileID: 8089138333680085957, guid: 4aaa63e9e5c48db4a8ff15c69db0e6bc,
+  _bulletPrefab: {fileID: 4772820829915606018, guid: 4aaa63e9e5c48db4a8ff15c69db0e6bc,
     type: 3}
 --- !u!114 &8760990523982901462
 MonoBehaviour:

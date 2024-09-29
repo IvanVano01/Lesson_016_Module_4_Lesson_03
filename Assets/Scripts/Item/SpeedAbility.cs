@@ -4,12 +4,12 @@ public class SpeedAbility : ItemAbility
 {
     [SerializeField] private float _speedMultiPlier;
 
-    public override void UseAbility(PlayerControlAbility playerTakeAbility)
+    public override void UseAbility(ItemCollectorAbility itemCollectorAbility)
     {
         Debug.Log($"Использую способность Скорость !!!");
 
-        playerTakeAbility.ChangeSpeed(_speedMultiPlier);
+        itemCollectorAbility.ChangeSpeed(_speedMultiPlier);
 
-        _abilityView.PlayEffect(playerTakeAbility.transform);
+        _abilityView.PlayEffect(itemCollectorAbility.transform);
     }
 }

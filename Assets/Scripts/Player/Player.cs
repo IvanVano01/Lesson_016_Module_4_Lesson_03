@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _health;
     [SerializeField] private float _speed;
     [SerializeField] private float _speedRotation;
-    [SerializeField] private PlayerControlAbility _playerTakeAbility;
+    [SerializeField] private ItemCollectorAbility itemCollectorAbility;
 
     private CharacterController _characterController;
     private InputHandler _inputHandler;
@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _inputHandler = new InputHandler();
         _mover = new Mover(_speed, _speedRotation, _inputHandler, _characterController, this);
-        _playerTakeAbility.Initialize(_inputHandler, this);
+        itemCollectorAbility.Initialize(_inputHandler, this);
     }
 
     private void Update()

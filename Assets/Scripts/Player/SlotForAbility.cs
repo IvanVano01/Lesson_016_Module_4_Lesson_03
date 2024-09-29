@@ -24,4 +24,19 @@ public class SlotForAbility : MonoBehaviour
     {
         _itemAbility = itemAbility;
     }
+
+    public bool IsAlreadyExists(ItemAbility itemAbility)
+    {
+        if (_itemAbility != null)
+        {
+            if (_itemAbility.GetType() == itemAbility.GetType())
+                return true;
+        }
+        return false;
+    }
+
+    public void ClearFieldAbility()
+    {
+        _itemAbility = null;
+    }
 }
